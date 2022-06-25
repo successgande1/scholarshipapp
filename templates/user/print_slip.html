@@ -1,0 +1,245 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    	<!-- META ============================================= -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="keywords" content="" />
+	<meta name="author" content="" />
+	<meta name="robots" content="" />
+	
+	<!-- DESCRIPTION -->
+	<meta name="description" content="WASU : WASU Scholarship 2022" />
+	
+	<!-- OG -->
+	<meta property="og:title" content="WASU:WASU Scholarship 2022" />
+	<meta property="og:description" content="WASU :WASU Scholarship 2022" />
+	<meta property="og:image" content="" />
+	<meta name="format-detection" content="telephone=no">
+	
+	<!-- FAVICONS ICON ============================================= -->
+	<link rel="icon" href="../error-404.html" type="image/x-icon" />
+	<link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/images/favicon.png' %}" />
+	
+	<!-- PAGE TITLE HERE ============================================= -->
+	<title>{% block title %} WASU Scholarship Slip {% endblock %}</title>
+	
+	<!-- MOBILE SPECIFIC ============================================= -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<!--[if lt IE 9]>
+	<script src="assets/js/html5shiv.min.js"></script>
+	<script src="assets/js/respond.min.js"></script>
+	<![endif]-->
+	
+	<!-- All PLUGINS CSS ============================================= -->
+  <script type="text/javascript" src="{% static 'assets/js/print.js' %}"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/css/assets.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/vendors/calendar/fullcalendar.css' %}">
+	
+	<!-- TYPOGRAPHY ============================================= -->
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/css/typography.css' %}">
+	
+	<!-- SHORTCODES ============================================= -->
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/css/shortcodes/shortcodes.css' %}">
+	
+	<!-- STYLESHEETS ============================================= -->
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/css/dashboard.css' %}">
+	<link class="skin" rel="stylesheet" type="text/css" href="{% static 'assets/css/color/color-1.css' %}">
+	<link class="skin" rel="stylesheet" type="text/css" href="{% static 'assets/mystyles.css' %}">
+</head>
+<body>
+  
+
+                   
+                <div id="slip">
+
+                
+                     
+                    <div class="slip-header">
+                        <h1 style="color:green ; text-align:center;">
+                            West African Students' Union (WASU) 
+                        </h1>
+                        
+                        <h2 style="color:Blue ; font-family:sans-serif; font-size:1.2rem; text-align:center;">
+                            2022 Scholarship Application
+                        </h2>
+                        <h3 style="color:rgb(146, 12, 12); font-family:sans-serif; font-size: 1.1rem; text-align: center;">
+                          Application Slip
+                        </h3>
+                     
+                    </div>
+                     <table class="table bg-white  slip-table" style="width: 70%; margin-left:15%; font-size:1rem;">
+                         <tbody>
+                            <tr>
+                                <th scope="row" style="text-align: left;">
+
+                                    <div>
+                                        <img  width="200" height="150" src="{% static 'assets/images/slip-logo.png' %}" alt="WASU Logo">
+                                      </div>
+
+
+
+                                </th>
+                                <td style="text-align:right ;">
+
+                                    <div class="pass">
+                                        <img class="img-thumbnail mt-1 ml-5" width="100" height="150" src="{{ user.profile.image.url }}" alt="applicant picture">
+                                      </div>
+                                    
+
+                                </td>
+                            </tr>
+
+                           
+                           <tr>
+                             <th scope="row" style="text-align: left;">Ref. No:</th>
+                             <td>{{ user.submitted.application }}</td>
+                           </tr> 
+
+                           <tr>
+                            <th scope="row">
+                                <h3 style="color:green ; font-size: 1.1rem;"> 
+                                    Profile Details
+                                </h3>
+                            </th>
+                            <td >
+
+                            </td>
+                        </tr>
+
+
+                           <tr>
+                             <th scope="row" style="text-align: left;">Surname</th>
+                             <td>{{user.profile.surname}}</td>
+                           </tr>   
+                           <tr>
+                             <th scope="row" style="text-align: left;">Othernames:</th>
+                             <td>{{user.profile.othernames}}</td>                                   
+                           </tr>  
+                           <tr>
+                             <th scope="row" style="text-align: left;">Phone:</th>
+                             <td>{{user.profile.phone}}</td>                                   
+                           </tr>  
+                           <tr>
+                             <th scope="row" style="text-align: left;">Email:</th>
+                             <td>{{user.email}}</td>                                   
+                           </tr>   
+                           <tr>
+                             <th scope="row" style="text-align: left;">Nation:</th>
+                             <td>{{user.profile.nation}}</td>                                   
+                           </tr> 
+                           <tr>
+                             <th scope="row" style="text-align: left;">State/Province:</th>
+                             <td>{{user.profile.state}}</td>                                   
+                           </tr>  
+                           
+                           
+                           <tr>
+                             <th scope="row" style="text-align: left;">Phone Number:</th>
+                             <td>{{user.profile.phone}}</td>                                   
+                           </tr>  
+                           
+                           <tr>
+                               <th scope="row">
+                                <h3 style="color:green ; font-size: 1.1rem;"> 
+                                    Education Details
+                                </h3>
+                               </th>
+                               <td >
+
+                               </td>
+                           </tr>
+                           
+                           <tr>
+                            <th scope="row" style="text-align: left;">Institution Type:</th>
+                            <td>{{user.education.qualification}}</td>
+                          </tr>   
+                          <tr>
+                            <th scope="row" style="text-align: left;">Name of Institution:</th>
+                            <td>{{user.education.instition}}</td>                                   
+                          </tr>  
+                          <tr>
+                            <th scope="row" style="text-align: left;">Admission/Matriculation Number:</th>
+                            <td>{{user.education.matnumber}}</td>                                   
+                          </tr>  
+                          <tr>
+                            <th scope="row" style="text-align: left;">Referee:</th>
+                            <td>{{user.education.reference}}</td>                                   
+                          </tr>   
+                          <tr>
+                            <th scope="row" style="text-align: left;">Referee Phone Number:</th>
+                            <td>{{user.education.refphone}}</td>                                   
+                          </tr> 
+                          <tr>
+                            <th scope="row" style="text-align: left;">Reason for the Scholarship:</th>
+                            <td>{{user.education.reasons}}</td>                                   
+                          </tr>  
+
+                          <tr>
+                            <th scope="row">
+                                <h3 style="color:green; font-size: 1.1rem;"> 
+                                    Bank Details
+                                </h3>
+                            </th>
+                            <td>
+
+                            </td>
+                        </tr>
+
+                          <tr>
+                            <th scope="row" style="text-align: left;">Bank Name:</th>
+                            <td>{{user.bankdetails.bank}}</td>
+                          </tr>   
+                          <tr>
+                            <th scope="row" style="text-align: left;">Account Number:</th>
+                            <td>{{user.bankdetails.account}}</td>                                   
+                          </tr>  
+                          <tr>
+                            <th scope="row" style="text-align: left;">Account Name:</th>
+                            <td>{{user.bankdetails.name}}</td>                                   
+                          </tr>  
+                          <tr>
+                            <th scope="row" style="text-align: left;">Bank Branch:</th>
+                            <td>{{user.bankdetails.branch}}</td>                                   
+                          </tr> 
+                          
+                          <tr>
+                              <th>
+                                <script type="text/javascript">
+        
+                                    function codespeedy(){
+                                      var print_div = document.getElementById("slip");
+                                var print_area = window.open();
+                                print_area.document.write(print_div.innerHTML);
+                                print_area.document.close();
+                                print_area.focus();
+                                print_area.print();
+                                print_area.close();
+                                // This is the code print a particular div element
+                                    }
+                                  </script>
+                                  
+
+                                  <form >
+                                  <input type="submit" class="btn btn-success" onclick="codespeedy()" value="Print">
+                                </form>
+
+                              </th>
+                              
+                          </tr>
+                          
+                         </tbody>
+                     </table>
+               
+                    </div>
+                  
+               
+              
+
+          
+    
+</body>
+</html>

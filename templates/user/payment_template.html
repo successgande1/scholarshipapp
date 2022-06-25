@@ -1,0 +1,60 @@
+{% extends 'dashboard_base.html' %}
+
+{% block title %} {{ user.username }} | Fee {% endblock %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+<!-- Left sidebar menu start -->
+{% include 'partials/_LeftSideBar.html' %}
+<!-- Left sidebar menu end -->
+
+<main class="ttr-wrapper">
+    <div class="container-fluid">
+        
+        <div class="container-fluid">
+            <div class="db-breadcrumb">
+                <h4 class="breadcrumb-title">Payment Fee</h4>
+                <ul class="db-breadcrumb-list">
+                    <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
+                    <li>Payment Fee</li>
+                </ul>
+            </div>	
+
+            
+            
+               
+
+                <!-- List Applicants -->
+                
+                    <div class="col-md-12">
+                        
+                        <table class="table bg-white table-borderless">
+                           
+    
+                              
+    
+                         {% include 'djangoflutterwave/pay_button.html' with plan=pro_plan %}
+    
+                            
+                            
+                            </table>
+                          
+                    </div>
+                    
+                
+                <!-- List Applicants END-->
+            
+        </div>
+
+        <!--Pagination Start Here-->
+        
+        
+    </div>
+</main>
+
+{% endblock %}

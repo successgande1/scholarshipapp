@@ -1,0 +1,72 @@
+{% extends 'dashboard_base.html' %}
+
+{% block title %} {{ user.username }} | Education Detail {% endblock %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+<!-- Left sidebar menu start -->
+{% include 'partials/_LeftSideBar.html' %}
+<!-- Left sidebar menu end -->
+
+<main class="ttr-wrapper">
+   
+        
+        
+        <div class="container-fluid">
+            	
+            <div class="row">
+                <!-- Alerts-->	
+				{% include 'partials/_alerts.html' %}
+				<!-- Alerts End-->
+                <!-- Your Profile Views Chart -->
+                <div class="col-md-12">
+                    <span class="h4" style="color: green;">Education</span><a class="btn btn-success ml-5" href="{% url 'edit-education' user.education.id %}">Edit</a>
+                    <hr>
+                    <table class="table bg-white table-borderless">
+                        <tbody>
+                          <tr>
+                            <th scope="row">Institution Type:</th>
+                            <td>{{user.education.qualification}}</td>
+                          </tr>   
+                          <tr>
+                            <th scope="row">Name of Institution:</th>
+                            <td>{{user.education.instition}}</td>                                   
+                          </tr>  
+                          <tr>
+                            <th scope="row">Admission/Matriculation Number:</th>
+                            <td>{{user.education.matnumber}}</td>                                   
+                          </tr>  
+                          <tr>
+                            <th scope="row">Referee:</th>
+                            <td>{{user.education.reference}}</td>                                   
+                          </tr>   
+                          <tr>
+                            <th scope="row">Referee Phone Number:</th>
+                            <td>{{user.education.refphone}}</td>                                   
+                          </tr> 
+                          <tr>
+                            <th scope="row">Reason for the Scholarship:</th>
+                            <td>{{user.education.reasons}}</td>                                   
+                          </tr>  
+                          
+                                          
+                        </tbody>
+
+                      </table>
+
+                      <a class="btn btn-success mr-5" href="{% url 'app-submit' %}">Continue</a>
+                      
+                </div>
+                <!-- Your Profile Views Chart END-->
+            </div>
+        </div>
+        
+    
+</main>
+
+{% endblock %}

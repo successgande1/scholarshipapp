@@ -1,0 +1,71 @@
+{% extends 'dashboard_base.html' %}
+
+{% block title %}  Scholarship Details {% endblock %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% load humanize %}
+
+{% block content %}
+
+<!-- Left sidebar menu start -->
+{% include 'partials/_LeftSideBar.html' %}
+<!-- Left sidebar menu end -->
+
+
+<main class="ttr-wrapper">
+    <div class="container-fluid">
+        
+        <div class="container-fluid">
+            <div class="db-breadcrumb">
+                <h4 class="breadcrumb-title">Scholarship Detail</h4>
+                <ul class="db-breadcrumb-list">
+                    <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
+                    <li>Scholarship Detail</li>
+                </ul>
+            </div>	
+
+            
+            
+               
+
+                <!-- List Applicants -->
+                
+                    <div class="col-md-12">
+
+                        <div class="card" style="width: 18rem;">
+                            <img src="..." class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h4 class="card-title">Name: {{ product.name }}</h4>
+                              <h5 class="card-title">Category: {{ product.category }}</h5>
+                              <h6 class="card-title">Processing Fee: {{ product.fee }}</h6>
+                              <form method = "POST">
+
+                                {% csrf_token %}
+
+                                {{form | crispy}}
+
+                                <input class="btn btn-success" type="submit" value="Pay Fee">
+                              </form>
+                            </div>
+                          </div>
+                       
+
+                    </div>
+                    
+                
+                <!-- List Applicants END-->
+            
+        </div>
+
+        <!--Pagination Start Here-->
+        
+        
+    </div>
+</main>
+
+
+
+{% endblock %}

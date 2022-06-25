@@ -1,0 +1,62 @@
+{% extends 'dashboard_base.html' %}
+
+{% block title %} {{ user.username }} | Bank Detail {% endblock %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+<!-- Left sidebar menu start -->
+{% include 'partials/_LeftSideBar.html' %}
+<!-- Left sidebar menu end -->
+
+<main class="ttr-wrapper">
+   
+        
+        
+        <div class="container-fluid">
+            	
+            <div class="row">
+                <!-- Alerts-->	
+				{% include 'partials/_alerts.html' %}
+				<!-- Alerts End-->
+                <!-- Your Profile Views Chart -->
+                <div class="col-md-12">
+                    <span class="h4" style="color: green;">Bank Details</span></span><a class="btn btn-success ml-5" href="{% url 'edit-bank' user.bankdetails.id %}">Edit</a>
+                    <hr>
+                    <table class="table bg-white table-borderless">
+                        <tbody>
+                          <tr>
+                            <th scope="row">Bank Name:</th>
+                            <td>{{user.bankdetails.bank}}</td>
+                          </tr>   
+                          <tr>
+                            <th scope="row">Account Number:</th>
+                            <td>{{user.bankdetails.account}}</td>                                   
+                          </tr>  
+                          <tr>
+                            <th scope="row">Account Name:</th>
+                            <td>{{user.bankdetails.name}}</td>                                   
+                          </tr>  
+                          <tr>
+                            <th scope="row">Bank Branch:</th>
+                            <td>{{user.bankdetails.branch}}</td>                                   
+                          </tr>   
+                          
+                          
+                        </tbody>
+                        
+                    </table>
+                    <a class="btn btn-success mr-5" href="{% url 'app-submit' %}">Continue</a>
+                </div>
+                <!-- Your Profile Views Chart END-->
+            </div>
+        </div>
+        
+    
+</main>
+
+{% endblock %}

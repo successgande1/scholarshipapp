@@ -1,0 +1,63 @@
+{% extends 'dashboard_base.html' %}
+
+{% block title %} {{ user.username }} | Scholarship {% endblock %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+<!-- Left sidebar menu start -->
+{% include 'partials/_LeftSideBar.html' %}
+<!-- Left sidebar menu end -->
+
+<main class="ttr-wrapper">
+   
+        
+        
+        <div class="container-fluid">
+            	
+            <div class="row">
+                <!-- Alerts-->	
+				{% include 'partials/_alerts.html' %}
+				<!-- Alerts End-->
+                <!-- Your Profile Views Chart -->
+                <div class="col-md-12">
+                    <span class="h4" style="color: green;">Scholar Details</span></span>
+                    <hr>
+                    <table class="table bg-white table-borderless">
+                        <tbody>
+                          <tr>
+                            <th scope="row">Applicant's Surname:</th>
+                            <td>{{user.profile.surname}}</td>
+                          </tr>  
+                          <tr>
+                            <th scope="row">Applicant's Other Names:</th>
+                            <td>{{user.profile.othernames}}</td>                                   
+                          </tr> 
+                          <tr>
+                            <th scope="row">Scholarship Category:</th>
+                            <td>{{candidate_edu}}</td>                                   
+                          </tr>  
+                          <tr>
+                            <th scope="row">Scholarship Amount:</th>
+                            <td> </td>                                   
+                          </tr>  
+                          
+                          
+                          
+                        </tbody>
+                        
+                    </table>
+                    <a class="btn btn-success mr-5" href="{% url 'candidate-scholarship' check_sholarship.id %}">Proceed to Payment</a>
+                </div>
+                <!-- Your Profile Views Chart END-->
+            </div>
+        </div>
+        
+    
+</main>
+
+{% endblock %}

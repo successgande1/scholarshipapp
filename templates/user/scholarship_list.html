@@ -1,0 +1,97 @@
+{% extends 'dashboard_base.html' %}
+
+{% block title %}  Scholarships {% endblock %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% load humanize %}
+
+{% block content %}
+
+<!-- Left sidebar menu start -->
+{% include 'partials/_LeftSideBar.html' %}
+<!-- Left sidebar menu end -->
+
+
+<main class="ttr-wrapper">
+    <div class="container-fluid">
+        
+        <div class="container-fluid">
+            <div class="db-breadcrumb">
+                <h4 class="breadcrumb-title">WASU Scholarship List</h4>
+                <ul class="db-breadcrumb-list">
+                    <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
+                    <li>List of Scholarship Categories</li>
+                </ul>
+            </div>	
+
+            
+            
+               
+
+                <!-- List Applicants -->
+                
+                    <div class="col-md-12">
+                        <table class="table bg-white">
+                            <thead class="bg-info text-white">
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Fee</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Added Date</th>
+                                
+                                <th scope="col">Action</th>
+                              </tr> 
+                            </thead>
+                           
+                            <tbody>
+                            
+                              
+                              {% for pay in scholarship %}
+                              <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ pay.name }}</td>
+                                <td>{{ pay.category }}</td>
+                                <td>{{ pay.fee }}</td>
+                                <td>${{ pay.amount | intcomma}}</td>
+                                <td>{{ pay.date | naturaltime}}</td>
+                                
+                                
+                                
+                                <th >
+                                  
+                                  
+                                  <a class="btn btn-info btn-sm" href="{% url 'candidate-scholarship' pay.id %}">Select</a>
+
+                                  
+
+                                 
+                                </th>
+                              </tr>
+                              {% endfor %}  
+                            
+                            </tbody>
+                            
+                            
+                            
+                          </table>
+                    </div>
+                    
+                
+                <!-- List Applicants END-->
+            
+        </div>
+
+        <!--Pagination Start Here-->
+        
+        
+    </div>
+</main>
+
+
+
+{% endblock %}
