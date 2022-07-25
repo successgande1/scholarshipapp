@@ -115,3 +115,7 @@ class PaymentForm(forms.Form):
     phone=forms.CharField(max_length=15)
     amount = forms.FloatField()
 
+
+#Search Applicant form
+class SearchApplicantForm(forms.Form):
+    value = forms.CharField(label = 'Applicant Name', max_length=30)

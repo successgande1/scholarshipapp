@@ -5,6 +5,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from PIL import Image
 from django.core.validators import RegexValidator
+from django.forms import CharField
 from phonenumber_field.modelfields import PhoneNumberField
 
 GENDER = (
@@ -117,7 +118,7 @@ class Submitted(models.Model):
          super().save(*args, **kwargs)
 
     def __unicode__(self):
-        return self.applicant
+        return self.applicant 
 
     def __str__(self):
         return f'Application Number: {self.application}-{self.applicant}'
@@ -146,3 +147,11 @@ class Payment(models.Model):
 
     def __str__(self):
         return f'WASU Payments: {self.applicant}-{self.amount}'
+
+class Approved(models.Model):
+    applicant = models.OneToOneField(User, on_delete = models.CASCADE, null = True)
+    reference = models.CharField(max_length=50)
+    date = models.DateTimeField(auto_now_add = True)
+
+    def __str__(self):
+        return f'WASU Scholarship Approval {self.applicant}'

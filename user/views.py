@@ -5,8 +5,8 @@ from django.shortcuts import render, redirect
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.contrib.auth.forms import UserCreationForm
 from django.db.models import Q
-from user.models import BANK, BankDetails, Education, Profile,  Submitted, Scholarship
-from .forms import AddEducationForm, AprovedScholarshipForm, PaymentForm, CreateUserForm, PaymentForm, UserUpdateForm, ProfileUpdateForm, ApplicantBankForm,ConfirmForm,ApplicantsSearchForm, ScholarshipForm
+from user.models import *
+from .forms import *
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -22,6 +22,7 @@ from django.views.decorators.http import require_http_methods
 from django.http import HttpResponse
 import requests
 import random
+
 
 import math
 
@@ -334,31 +335,68 @@ def failed_payment(request):
     return render(request, 'user/failed_payment.html', context)
 
 
-#Search Applicants by Nation
+#Search Applicants using Q Objects
 @login_required(login_url='user-login')
 def search_applicants(request):
-    
-    form = ApplicantsSearchForm(request.GET or None)
-    if form.is_valid():
-        list_submited = Profile.objects.filter(
-            nation__icontains=form.cleaned_data['nation'],
-            state__icontains=form.cleaned_data['state']
-        )
+    #Set an Empty Dict of Context
+    context = {}
+    #Search Applicant Form
+    searchForm = SearchApplicantForm(request.GET or None)
+    if searchForm.is_valid():
+        #Value of search form
+        value = searchForm.cleaned_data['value']
+        #Filter Applicant by Surname or Othernames using Q Objects
+        user_filter = Q(surname__icontains = value) | Q(othernames__icontains = value)
+        #Apply the Profile Object Filter
+        list_submited = Profile.objects.filter(user_filter) 
+
     else:
-        list_submited = Submitted.objects.all()
+        list_submited = Profile.objects.all()
 
     paginator = Paginator(list_submited, 5)
     page = request.GET.get('page')
-    paged_listApps = paginator.get_page(page)
-   
-    context = {
-    'list_applicants':paged_listApps,
-    'form':form,
-   
+    paged_list_submited = paginator.get_page(page)
+    #Update context variable
+    context.update({
+    'list_applicants':paged_list_submited,
+    'searchForm':searchForm,
     
-    }
+    })
 
-    return render(request, 'user/list_applicants.html',context)
+    return render(request, 'user/list_applicants.html', context)
+
+#Approve Scholarship Application
+@login_required(login_url='user-login')
+def approve_applicant(request, pk):
+
+    #Get Applicant id 
+    app_id = Profile.objects.get(id=pk) 
+    #Get Applicant's names
+    applicant_detail = app_id.surname.upper()
+    app_othername = app_id.othernames.upper()
+    #Try Check Application Submission
+    try:
+        app_id = Submitted.objects.get(applicant_id=pk) 
+        
+    #When Applicant is Not Found
+    except Submitted.DoesNotExist:
+        #Send Message
+        messages.error(request, f"{applicant_detail} {app_othername}  has No Submited Application")
+        #Redirect Back
+        return redirect('search-applicant')
+    else:
+        if request.method == "POST":
+            # applicant = Submitted.objects.get(applicant_id=pk) 
+            # Approve_app = Approved.objects.create()
+            
+          
+            messages.success(request, f'{applicant_detail} Approved successfully')
+            return redirect('search-applicants') 
+        context = {
+            'applicant':applicant_detail,
+            'app_othername':app_othername,
+        }
+        return render(request, 'user/approval_form.html', context)
 
 
 #Method for viewing applicant profile
@@ -484,3 +522,21 @@ def payment_response(request):
     print(status)
     print(tx_ref)
     return HttpResponse('Finished')
+
+#Search Applicant Function View
+# def search_applicant(request):
+#     form = SearchApplicantForm(request.POST or None)
+    
+#     if request.method == 'POST':
+
+#         value = form.cleaned_data['value'].value()
+#         user_filter = Q (Q(surname__icontains = value)
+#                         | Q(othernames__icontains = value)
+#                         | Q(email__icontains = value)
+#                         )
+#         Apprlicant = Profile.objects.filter(user_filter)
+
+#     context = {
+
+#     }
+#     return render(request, 'user/search_applicant.html', context)

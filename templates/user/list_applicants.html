@@ -24,6 +24,9 @@
                     <li>List of Applicants</li>
                 </ul>
             </div>	
+            <!-- Alerts-->	
+				{% include 'partials/_alerts.html' %}
+				<!-- Alerts End-->
 
             <div class="container">
 
@@ -38,7 +41,7 @@
                       <form method="GET">
                         {% csrf_token %}
       
-                        {{ form | crispy }}
+                        {{ searchForm | crispy }}
                        
       
                         <!--Check Page Title and Allocate Submit Value-->
@@ -66,9 +69,9 @@
                             <thead class="bg-info text-white">
                               <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Username</th>
-                                <th scope="col">Nation</th>
-                                <th scope="col">State/Province</th>
+                                <th scope="col">Surname</th>
+                                <th scope="col">Othernames</th>
+                                <th scope="col">Email</th>
                                 <th scope="col">Phone Number</th>
                                 <th scope="col">Select</th>
                               </tr> 
@@ -80,12 +83,12 @@
                               {% for applicants in list_applicants %}
                               <tr>
                                 <td>{{ forloop.counter }}</td>
-                                <td>{{ applicants.applicant }}</td>
-                                <td>{{ applicants.applicant.profile.nation }}</td>
-                                <td>{{ applicants.applicant.profile.state }}</td>
-                                <td>{{ applicants.applicant.profile.phone }}</td>
+                                <td>{{ applicants.applicant.profile.surname }}</td>
+                                <td>{{ applicants.othernames }}</td>
+                                <td>{{ applicants.applicant.email }}</td>
+                                <td>{{ applicants.profile.phone }}</td>
                                 
-                                <th ><a class="btn btn-info btn-sm" href="">Aprove</a></th>
+                                <th ><a class="btn btn-info btn-sm" href="{% url 'approve-applicant' applicants.id %}">Aprove</a></th>
                               </tr>
                               {% endfor %}  
                             
